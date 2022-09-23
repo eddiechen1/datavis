@@ -1,0 +1,39 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 450,
+  "title": "Most affordable cities to move to in the USA",
+  "projection": {"type": "equalEarth"},
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/eddiechen1/datavis/main/.github/workflows/ne_110m(3).json",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "mark": {"type": "geoshape", "fill": "lightgray", "stroke": "white"}
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/eddiechen1/datavis/main/.github/workflows/Movinga_best_cities.csv"
+      },
+      "mark": {"type": "circle", "tooltip": {"content": "data"}},
+      "encoding": {
+        "longitude": {"field": "Long", "type": "quantitative"},
+        "latitude": {"field": "Lat", "type": "quantitative"},
+        "size": {
+          "field": "Housing Affordability",
+          "type": "quantitative",
+          "title": "Housing Affordability (0-100)",
+          "scale": {"domain": [80, 95]}
+        },
+        "color": {
+          "field": "Living Costs by Income",
+          "type": "quantitative",
+          "title": "Living Costs by Income (0-100)",
+          "scale": {"scheme": "blues"}
+        }
+      }
+    }
+  ],
+  "config": {}
+}
